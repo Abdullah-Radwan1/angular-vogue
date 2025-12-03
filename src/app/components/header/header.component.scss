@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+.title {
+  font-weight: 500;
+  font-family: 'Playfair Display', serif;
+  font-size: x-large;
+  letter-spacing: 2px;
+}
+nav > a {
+  border-radius: 10px;
+  padding: 5px 10px;
+  transition: background-color 0.2s ease-in-out;
+}
+nav > a:hover {
+  background-color: hsl(var(--secondary));
+}

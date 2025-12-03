@@ -1,0 +1,85 @@
+<div class="space-y-8 container mx-auto px-4">
+  @if(!cartStore.items().length) {
+  <!-- when there are no cart items -->
+  <div class="text-center py-16">
+    <p class="text-lg">Your <span class="font-semibold">cart</span> is empty</p>
+    <a routerLink="/products" class="btn btn-primary mt-6 inline-block">Continue Shopping</a>
+  </div>
+  } @else {
+  <!-- cart view -->
+  <div class="overflow-x-auto bg-white rounded-lg border border-gray-200">
+    <table class="table">
+      <thead class="bg-gray-100">
+        <tr>
+          <th class="font-semibold">Product</th>
+          <th class="font-semibold">Price</th>
+          <th class="font-semibold">Quantity</th>
+          <th class="font-semibold">Total</th>
+          <th class="font-semibold">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for(item of cartStore.items(); track item.id) {
+        <tr class="hover:bg-gray-50 border-b border-gray-200">
+          <td>
+            <div class="flex items-center gap-4">
+              <img class="object-cover w-16 h-16 rounded" [src]="item.image" [alt]="item.name" />
+              <div>
+                <h6 class="font-medium">{{ item.name }}</h6>
+              </div>
+            </div>
+          </td>
+          <td class="font-medium">${{ item.price | number : '1.2-2' }}</td>
+          <td>
+            <div class="flex items-center gap-2">
+              <button
+                (click)="decreaseQuantity(item.id)"
+                class="btn btn-sm btn-square btn-ghost border border-gray-300 hover:bg-gray-200"
+              >
+                -
+              </button>
+              <span class="font-medium w-8 text-center">{{ item.quantity }}</span>
+              <button
+                (click)="increaseQuantity(item.id)"
+                class="btn btn-sm btn-square btn-ghost border border-gray-300 hover:bg-gray-200"
+              >
+                +
+              </button>
+            </div>
+          </td>
+          <td class="font-semibold">${{ item.price * item.quantity | number : '1.2-2' }}</td>
+          <td>
+            <button
+              (click)="cartStore.removeFromCart(item.id)"
+              class="btn btn-ghost btn-sm hover:bg-gray-200"
+            >
+              Remove
+            </button>
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <div
+    class="flex flex-col md:flex-row justify-between items-center gap-6 p-6 bg-gray-100 rounded-lg"
+  >
+    <div class="flex gap-3">
+      <button
+        (click)="cartStore.clearCart()"
+        class="btn btn-outline border-gray-300 hover:bg-gray-200"
+      >
+        Clear Cart
+      </button>
+      <a routerLink="/checkout" class="btn btn-primary">Proceed to Checkout</a>
+    </div>
+    <div class="text-center md:text-right">
+      <p class="text-2xl text-success font-bold">
+        Total: ${{ cartStore.totalAmount() | number : '1.2-2' }}
+      </p>
+      <!-- 1.2-2 means => {minIntegerDigits}.{minFractionDigits}-{maxFractionDigits} -->
+    </div>
+  </div>
+  }
+</div>

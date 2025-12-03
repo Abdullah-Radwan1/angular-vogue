@@ -1,0 +1,129 @@
+<div class="filters-container w-full bg-base-100 border-b border-base-300">
+  <div
+    class="container mx-auto px-4 py-4 flex flex-col md:flex-row gap-4 md:items-center md:justify-between"
+  >
+    <!-- Search Bar -->
+    <div class="flex-1 max-w-md flex items-center gap-2">
+      <input
+        type="text"
+        class="input input-bordered w-full"
+        placeholder="Search products..."
+        [(ngModel)]="searchTerm"
+        (keyup.enter)="onSearch(searchTerm)"
+      />
+      <button class="btn btn-primary" (click)="onSearch(searchTerm)">Search</button>
+    </div>
+
+    <!-- Filters Row -->
+    <div class="flex flex-wrap gap-2 md:gap-4 items-center">
+      <!-- Price Range Dropdown -->
+      <div class="dropdown dropdown-bottom">
+        <div tabindex="0" class="btn btn-outline btn-sm gap-2">
+          <lucide-icon [name]="SlidersHorizontal" class="w-4 h-4"></lucide-icon>
+          Price Range
+        </div>
+
+        <div tabindex="0" class="dropdown-content card card-compact w-64 p-2 shadow bg-base-100">
+          <div class="card-body space-y-4">
+            <div>
+              <label class="label text-xs">Min: ${{ minPrice }}</label>
+              <input
+                type="range"
+                min="0"
+                max="350"
+                [value]="minPrice"
+                (change)="onMinPriceChange($event)"
+                class="range range-xs range-primary"
+              />
+            </div>
+
+            <div>
+              <label class="label text-xs">Max: ${{ maxPrice }}</label>
+              <input
+                type="range"
+                min="0"
+                max="350"
+                [value]="maxPrice"
+                (change)="onMaxPriceChange($event)"
+                class="range range-xs range-secondary"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sort Dropdown -->
+      <div class="dropdown dropdown-bottom">
+        <div tabindex="0" class="btn btn-outline btn-sm">Sort</div>
+
+        <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+          @for (option of sortOptions; track option.value) {
+          <li>
+            <label class="label cursor-pointer justify-start gap-2">
+              <input
+                type="radio"
+                name="sort-radio"
+                class="radio radio-primary"
+                [value]="option.value"
+                [checked]="sortOption === option.value"
+                (change)="onSortChange($event)"
+              />
+              <span class="label-text">{{ option.label }}</span>
+            </label>
+          </li>
+          }
+        </ul>
+      </div>
+
+      <!-- Categories Dropdown -->
+      <div class="dropdown dropdown-bottom">
+        <div tabindex="0" class="btn btn-outline btn-sm">Categories</div>
+
+        <div tabindex="0" class="dropdown-content card card-compact w-64 p-2 shadow bg-base-100">
+          <div class="card-body space-y-2">
+            @for (cat of categories; track cat.value) {
+            <label class="label cursor-pointer justify-start gap-2">
+              <input
+                type="checkbox"
+                class="checkbox checkbox-primary"
+                [checked]="selectedCategories.includes(cat.value)"
+                (change)="onCategoryChange(cat.value, $event)"
+              />
+
+              <lucide-icon [name]="cat.icon" size="20" class="opacity-90"></lucide-icon>
+
+              <span class="label-text">{{ cat.label }}</span>
+            </label>
+            }
+          </div>
+        </div>
+      </div>
+
+      <!-- Clear Button -->
+      @if (selectedCategories.length > 0 || minPrice > 0 || maxPrice < 350) {
+      <button class="btn btn-ghost btn-sm text-error" (click)="clearFilters()">Clear All</button>
+      }
+    </div>
+
+    <!-- Active Filters Display -->
+    <div class="mt-4 pt-4 border-t border-base-300 flex flex-wrap gap-2 items-center">
+      <span class="text-sm text-base-content/70">Active filters:</span>
+
+      @for (category of selectedCategories; track category) {
+      <span class="badge badge-neutral">
+        {{ formatCategoryName(category) }}
+        <button
+          class="btn btn-xs btn-circle btn-ghost"
+          (click)="onCategoryChange(category, { target: { checked: false } })"
+        >
+          ✕
+        </button>
+      </span>
+      } @if (minPrice > 0) {
+      <span class="badge badge-neutral">Min: ${{ minPrice }}</span>
+      } @if (maxPrice < 350) {
+      <span class="badge badge-neutral">Max: ${{ maxPrice }}</span>
+      }
+    </div>
+  </div>
+</div>

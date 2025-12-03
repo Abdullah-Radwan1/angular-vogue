@@ -1,0 +1,75 @@
+<!-- about.component.html -->
+<section class="max-w-4xl mx-auto p-6 text-gray-900">
+  <!-- Header -->
+  <div class="text-center mb-12">
+    <p class="text-gray-800">
+      This App is made by
+      <a
+        [target]="'_blank'"
+        href="https://github.com/Abdullah-Radwan1"
+        class="font-semibold text-gray-900 link"
+        >Abdullah Radwan</a
+      >. The UI is inspired by
+      <a
+        [target]="'_blank'"
+        href="https://depot.qodeinteractive.com/"
+        class="font-semibold text-gray-700 hover:text-gray-900 transition-colors link"
+      >
+        Depot
+      </a>
+    </p>
+  </div>
+
+  <!-- Profile / Description -->
+  <div class="flex flex-col md:flex-row items-start gap-8 mb-12">
+    <!-- Right: Info -->
+    <div class="flex-1 space-y-4">
+      <p class="text-gray-900">
+        I am a <span class="font-semibold text-gray-900">Full-Stack Developer</span> skilled in
+        <span class="font-semibold text-gray-800">React, Next.js, Angular and TypeScript</span>,
+        committed to building scalable and high-performance applications.
+      </p>
+      <p class="text-gray-800">
+        Fast learner with strong adaptability, able to integrate new technologies quickly and
+        deliver reliable features end-to-end. Focused on maintainable architecture, SEO
+        optimization, and improving user experience across the full development lifecycle.
+      </p>
+
+      <!-- Skills / Features -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-4">
+        <div
+          class="flex items-center gap-3 p-4 border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition bg-gray-50 hover:bg-gray-100"
+        >
+          <lucide-angular [img]="IconBriefcase" class="text-gray-700"></lucide-angular>
+          <span class="text-gray-900 font-medium">Full-Stack Development</span>
+        </div>
+        <div
+          class="flex items-center gap-3 p-4 border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition bg-gray-50 hover:bg-gray-100"
+        >
+          <lucide-angular [img]="Rocket" class="text-gray-700"></lucide-angular>
+          <span class="text-gray-900 font-medium">Fast Learner & Adaptable</span>
+        </div>
+        <div
+          class="flex items-center gap-3 p-4 border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition bg-gray-50 hover:bg-gray-100"
+        >
+          <lucide-angular [img]="Layers" class="text-gray-700"></lucide-angular>
+          <span class="text-gray-900 font-medium">Maintainable & Scalable Architecture</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer / CTA -->
+  <div class="text-center mt-12">
+    <p class="text-gray-800 mb-4">
+      Looking forward to building amazing applications and improving user experience with clean,
+      efficient code.
+    </p>
+    <a
+      href="mailto:abdullah@example.com"
+      class="inline-block px-6 py-3 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors"
+    >
+      Contact Me
+    </a>
+  </div>
+</section>

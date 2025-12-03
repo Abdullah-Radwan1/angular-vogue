@@ -1,0 +1,93 @@
+<nav class="bg-base-100 flex items-center justify-between sm:justify-evenly px-4 py-6">
+  <!-- Left side - Home, Categories, Shop (desktop only) -->
+  <div class="hidden sm:flex items-center gap-8 text-sm">
+    <a href="/">Home</a>
+
+    <!-- Categories Dropdown -->
+    <div class="dropdown">
+      <label tabindex="0" class="cursor-pointer">Categories</label>
+
+      <ul
+        tabindex="0"
+        class="menu dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 w-56 rounded-box"
+      >
+        <li>
+          <a href="/products?category=TABLES" class="flex items-center gap-2">
+            <lucide-icon [name]="Coffee" class="w-4 h-4"></lucide-icon>
+            Tables
+          </a>
+        </li>
+
+        <li>
+          <a href="/products?category=CHAIRS" class="flex items-center gap-2">
+            <lucide-icon [name]="Sofa" class="w-4 h-4"></lucide-icon>
+            Chairs
+          </a>
+        </li>
+
+        <li>
+          <a href="/products?category=CLOCKS" class="flex items-center gap-2">
+            <lucide-icon [name]="Clock" class="w-4 h-4"></lucide-icon>
+            Clocks
+          </a>
+        </li>
+
+        <li>
+          <a href="/products?category=LAMPS" class="flex items-center gap-2">
+            <lucide-icon [name]="LampCeiling" class="w-4 h-4"></lucide-icon>
+            Lamps
+          </a>
+        </li>
+
+        <li>
+          <a href="/products?category=ACCESSORIES" class="flex items-center gap-2">
+            <lucide-icon [name]="RadioReceiver" class="w-4 h-4"></lucide-icon>
+            Accessories
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <a routerLink="/products" href="/products">Shop</a>
+  </div>
+
+  <!-- Center - Logo -->
+  <div class="w-full sm:w-auto order-first sm:order-none">
+    <h4 class="text-2xl font-bold tracking-widest">VOGUE HAVEN</h4>
+  </div>
+
+  <!-- Right side - Cart + Hamburger Menu -->
+  <section class="flex items-center gap-4">
+    <!-- Cart Button -->
+    <a class="hidden sm:block" routerLink="/about">About us </a>
+    <a routerLink="/wishlist" href="/wishlist">
+      <lucide-angular size="20" [img]="Heart"></lucide-angular
+    ></a>
+    <button routerLink="/cart" class="btn relative btn-square btn-ghost">
+      <lucide-angular size="20" [img]="ShoppingBag"></lucide-angular>
+      <span class="badge-xs bg-black text-white rounded-full absolute bottom-8 left-8">
+        {{ cartStore.totalItems() }}
+      </span>
+    </button>
+
+    <!-- Mobile Hamburger Menu -->
+    <div class="dropdown dropdown-end sm:hidden">
+      <label tabindex="0" class="btn btn-ghost btn-square">
+        <lucide-angular [img]="Menu"></lucide-angular>
+      </label>
+      <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 w-52">
+        <li><a href="/">Home</a></li>
+        <li>
+          <a>Categories</a>
+          <ul class="p-2">
+            <li><a href="/products?category=Tables">Tables</a></li>
+            <li><a href="/products?category=Chairs">Chairs</a></li>
+            <li><a href="/products?category=Clocks">Clocks</a></li>
+          </ul>
+        </li>
+        <li><a routerLink="/products">Shop</a></li>
+        <li><a routerLink="/about">About us</a></li>
+      </ul>
+    </div>
+  </section>
+</nav>
