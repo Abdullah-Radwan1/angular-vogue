@@ -3,8 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
 import { catchError, EMPTY } from 'rxjs';
 import { featuredDto, ProductDto } from '../utils/product.schema';
+import { environment } from '../enviroments/enviroment';
 
-const API_URL = 'nestecommercee.vercel.app'; // change this
+const API_URL = environment.apiUrl;
 
 export interface ProductState {
   products: ProductDto[];

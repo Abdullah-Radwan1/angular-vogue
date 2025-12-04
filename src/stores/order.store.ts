@@ -1,56 +1,61 @@
+import { HttpClient } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
-import { Apollo, gql } from 'apollo-angular';
-import { tap } from 'rxjs';
 
-const GET_ORDER = gql`
-  query GetOrder($id: String!) {
-    order(id: $id) {
-      id
-      status
-      totalAmount
-      createdAt
-      updatedAt
-      items {
-        id
-        quantity
-        price
-        product {
-          id
-          name
-          price
-          image
-        }
-      }
-      createdAt
-    }
-  }
-`;
-const initialState = {
+import { orderDto } from '../utils/product.schema';
+import { environment } from '../enviroments/enviroment';
+import { catchError, EMPTY } from 'rxjs';
+
+const API_URL = environment.apiUrl;
+
+type initialState = {
+  orders: orderDto[];
+  orderDetail: orderDto | null;
+  loading: boolean;
+  error: string | null;
+};
+
+const initialState: initialState = {
   orders: [],
   orderDetail: null,
-  error: null,
   loading: false,
+  error: null,
 };
+
 export const OrderStore = signalStore(
   { providedIn: 'root' },
 
   withState(() => initialState),
-  withMethods((store, appolo = inject(Apollo)) => ({
+
+  withMethods((store, http = inject(HttpClient)) => ({
+    /** -------------------------------
+     * GET ORDER BY ID
+     * ------------------------------ */
     getOrder(id: string) {
       patchState(store, { loading: true, error: null });
-      return appolo
-        .query<{ order: any }>({
-          query: GET_ORDER,
-          variables: { id },
-        })
+
+      http
+        .get<orderDto>(`${API_URL}/orders/${id}`)
         .pipe(
-          tap({
-            next: ({ data }) => patchState(store, { orderDetail: data.order, loading: false }),
-            error: (error) => patchState(store, { error: error.message, loading: false }),
+          catchError((err) => {
+            patchState(store, {
+              error: err.message,
+              loading: false,
+            });
+            return EMPTY;
           })
-        );
+        )
+        .subscribe((order) => {
+          patchState(store, {
+            orderDetail: order,
+            loading: false,
+          });
+        });
     },
+
+    /** -------------------------------
+     * SET ERROR
+     * ------------------------------ */
     setError(error: any) {
       patchState(store, {
         error,

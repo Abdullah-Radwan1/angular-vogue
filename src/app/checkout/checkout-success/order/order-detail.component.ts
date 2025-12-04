@@ -1,6 +1,6 @@
 import { Component, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Order } from '../../order.types';
+import { orderDto } from '../../../../utils/product.schema';
 
 @Component({
   selector: 'app-order-detail',
@@ -8,7 +8,7 @@ import { Order } from '../../order.types';
   templateUrl: './order-detail.html',
 })
 export class OrderDetailComponent {
-  order = input.required<Order | null>();
+  order = input.required<orderDto | null>();
 }
 //   order = input.required<OrderWithItems | null>();
 //s

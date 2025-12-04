@@ -27,6 +27,6 @@ export class CheckoutSuccessComponent implements OnInit {
       this.orderStore.setError('No order ID found');
       return;
     }
-    this.orderStore.getOrder(orderId).subscribe();
+    this.orderStore.getOrder(orderId);
   }
 }
