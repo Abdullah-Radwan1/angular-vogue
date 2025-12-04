@@ -13,8 +13,8 @@ export class StripeService {
     const totalAmount = this.store.totalAmount();
 
     return this.http.post<{ url: string }>(
-      //todo
-      'http://localhost:3000/checkout',
+      //todo-backend url
+      'nestvogue.vercel.app/checkout',
       {
         items: items.map((item) => ({
           productId: item.id,
