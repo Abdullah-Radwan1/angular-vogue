@@ -6,12 +6,12 @@ const ProductSchema = z.object({
   id: z.string().uuid(),
   name: z.string(),
   price: z.number(),
-  image: z.string().url(),
+  image: z.string(), // backend sends relative path
   description: z.string(),
-  isFeatured: z.boolean(),
+  isFeatured: z.boolean().optional(), // backend doesn't send it
   stripePriceId: z.string().optional(),
   Category: ProductCategory,
-  tags: z.array(z.string()), // ✅ this is the correct tags type
+  tags: z.array(z.string()),
 });
 
 const featuredSchema = z.object({
@@ -19,25 +19,27 @@ const featuredSchema = z.object({
   name: z.string(),
   description: z.string(),
   price: z.number(),
-  image: z.string().url(),
+  image: z.string(),
 });
 
 const orderItemSchema = z.object({
-  id: z.string().uuid().optional(), // frontend usually optional
-  name: z.string(),
-  image: z.string(),
+  id: z.string().uuid().optional(),
   quantity: z.number().int().min(1),
   price: z.number().int().nonnegative(),
   productId: z.string().uuid(),
+  product: ProductSchema,
+  createdAt: z.string().optional(),
+  updatedAt: z.string().optional(),
 });
-const orderSchema = z.object({
+
+export const orderSchema = z.object({
   id: z.string().uuid().optional(),
-  status: z.enum(['PENDING', 'COMPLETED', 'CANCELLED']).default('PENDING'),
+  status: z.enum(['PENDING', 'COMPLETED', 'CANCELLED']),
   totalAmount: z.number().int().min(0),
-  userId: z.string().uuid().optional(), // optional same as Prisma
-  items: z.array(orderItemSchema).min(1),
-  createdAt: z.string().optional(), // ✔ ADD THIS
-  updatedAt: z.string().optional(), // ✔ AND THIS
+  userId: z.string().uuid().nullable().optional(), // backend returns null
+  items: z.array(orderItemSchema),
+  createdAt: z.string().optional(),
+  updatedAt: z.string().optional(),
 });
 
 export type ProductDto = z.infer<typeof ProductSchema>;

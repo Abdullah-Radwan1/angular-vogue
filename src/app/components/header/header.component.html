@@ -13,8 +13,7 @@
       >
         <li>
           <a href="/products?category=TABLES" class="flex items-center gap-2">
-                                  <lucide-icon [name]="RadioReceiver" class="w-4 h-4"></lucide-icon>
-
+            <lucide-icon [name]="RadioReceiver" class="w-4 h-4"></lucide-icon>
 
             Tables
           </a>
@@ -62,9 +61,13 @@
   <!-- Right side - Cart + Hamburger Menu -->
   <section class="flex items-center gap-4">
     <!-- Cart Button -->
-    <a class="hidden sm:block" routerLink="/about">About us </a>
+    <a class="hidden sm:block" routerLink="/about">About </a>
     <a routerLink="/wishlist" href="/wishlist">
-      <lucide-angular size="20" [img]="Heart"></lucide-angular
+      <lucide-angular
+        size="20"
+        class="hover:text-red-600 hover:scale-105"
+        [img]="Heart"
+      ></lucide-angular
     ></a>
     <button routerLink="/cart" class="btn relative btn-square btn-ghost">
       <lucide-angular size="20" [img]="ShoppingBag"></lucide-angular>

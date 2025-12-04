@@ -8,7 +8,7 @@ import { orderDto } from '../../../../utils/product.schema';
   templateUrl: './order-detail.html',
 })
 export class OrderDetailComponent {
-  order = input.required<orderDto | null>();
+  order = input<orderDto | null>(null);
 }
 //   order = input.required<OrderWithItems | null>();
 //s

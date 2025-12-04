@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
 
-import { orderDto } from '../utils/product.schema';
+import { orderDto, orderSchema } from '../utils/product.schema';
 import { environment } from '../enviroments/enviroment';
 import { catchError, EMPTY } from 'rxjs';
 
@@ -33,9 +33,9 @@ export const OrderStore = signalStore(
      * ------------------------------ */
     getOrder(id: string) {
       patchState(store, { loading: true, error: null });
-
       http
         .get<orderDto>(`${API_URL}/order/${id}`)
+
         .pipe(
           catchError((err) => {
             patchState(store, {
@@ -46,8 +46,9 @@ export const OrderStore = signalStore(
           })
         )
         .subscribe((order) => {
+          const parsed = orderSchema.parse(order);
           patchState(store, {
-            orderDetail: order,
+            orderDetail: parsed,
             loading: false,
           });
         });

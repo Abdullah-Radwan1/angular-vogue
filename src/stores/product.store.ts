@@ -14,6 +14,7 @@ export interface ProductState {
   categoryProducts: ProductDto[];
   selectedProduct: ProductDto | null;
   loading: boolean;
+  relatedloadig: boolean;
   error: string | null;
 }
 
@@ -24,6 +25,7 @@ const initialState: ProductState = {
   categoryProducts: [],
   selectedProduct: null,
   loading: false,
+  relatedloadig: false,
   error: null,
 };
 
@@ -87,12 +89,13 @@ export const productStore = signalStore(
     // RELATED PRODUCTS
     // ------------------------------------------------------
     loadRelatedProducts: (category: string) => {
+      patchState(store, { relatedloadig: true });
       http
         .get<ProductDto[]>(`${API_URL}/products/related`, {
           params: { category },
         })
         .subscribe((data) => {
-          patchState(store, { relatedProducts: data });
+          patchState(store, { relatedProducts: data, relatedloadig: false });
         });
     },
 
