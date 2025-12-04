@@ -35,7 +35,7 @@ export const OrderStore = signalStore(
       patchState(store, { loading: true, error: null });
 
       http
-        .get<orderDto>(`${API_URL}/orders/${id}`)
+        .get<orderDto>(`${API_URL}/order/${id}`)
         .pipe(
           catchError((err) => {
             patchState(store, {
