@@ -1,5 +1,5 @@
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:3000',
+  apiUrl: 'https://nestvogue.vercel.app',
 };
 //https://nestvogue.vercel.app
