@@ -14,7 +14,7 @@ export class StripeService {
 
     return this.http.post<{ url: string }>(
       //todo-backend url
-      'nestvogue.vercel.app/checkout',
+      'https://angular-vogue.vercel.app/checkout',
       {
         items: items.map((item) => ({
           productId: item.id,
