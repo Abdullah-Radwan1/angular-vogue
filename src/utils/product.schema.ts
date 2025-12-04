@@ -25,9 +25,8 @@ const featuredSchema = z.object({
 const orderItemSchema = z.object({
   id: z.string().uuid().optional(), // frontend usually optional
   name: z.string(),
-  image: z.string().optional(),
+  image: z.string(),
   quantity: z.number().int().min(1),
-
   price: z.number().int().nonnegative(),
   productId: z.string().uuid(),
 });
