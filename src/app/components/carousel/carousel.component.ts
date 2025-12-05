@@ -1,9 +1,12 @@
 import { Component, signal, OnInit, OnDestroy, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
+import { RouterLink, RouterModule } from '@angular/router';
+
 @Component({
   selector: 'app-banner',
-  templateUrl: './banner.html',
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  templateUrl: './carousel.component.html',
+  standalone: true, // ✅ This is important in Angular 19 standalone components
+  imports: [RouterModule], // ✅ Only RouterModule needed
 })
 export class BannerComponent implements OnInit, OnDestroy {
   banners = [
@@ -14,6 +17,8 @@ export class BannerComponent implements OnInit, OnDestroy {
       img: '/chair.png',
       ctaText: 'Shop Chairs',
       features: ['Ergonomic Design', 'Premium Materials', '24h Comfort'],
+      routerLink: ['/products'],
+      queryParams: { category: 'CHAIRS' },
     },
     {
       title: 'Artistic Touch',
@@ -22,6 +27,8 @@ export class BannerComponent implements OnInit, OnDestroy {
       img: '/vase.jpg',
       ctaText: 'Explore Vases',
       features: ['Handcrafted', 'Unique Designs', 'Premium Ceramic'],
+      routerLink: ['/products'],
+      queryParams: { category: 'ACCESSORIES' },
     },
     {
       title: 'Timeless Precision',
@@ -30,6 +37,8 @@ export class BannerComponent implements OnInit, OnDestroy {
       img: '/clock.jpg',
       ctaText: 'Discover Clocks',
       features: ['Quiet Movement', 'Sleek Design', 'Battery Included'],
+      routerLink: ['/products'],
+      queryParams: { category: 'CLOCKS' },
     },
   ];
 
@@ -39,7 +48,7 @@ export class BannerComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.intervalId = window.setInterval(() => {
       this.nextBanner();
-    }, 3500);
+    }, 2500);
   }
 
   ngOnDestroy(): void {

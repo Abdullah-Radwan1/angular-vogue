@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Categories } from '../categories/categories.component';
 import { Footer } from '../footer/footer';
-import { BannerComponent } from '../banner/banner';
+import { BannerComponent } from '../carousel/carousel.component';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
