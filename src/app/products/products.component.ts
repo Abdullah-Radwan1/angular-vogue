@@ -7,10 +7,11 @@ import untilDestroyed from '../../utils/untilDestroyed';
 import { cartStore } from '../../stores/cart.store';
 import { ProductDto } from '../../utils/product.schema';
 import { FiltersComponent } from '../components/filters/filters.component';
+import { Skeleton } from '../components/skeleton/skeleton';
 
 @Component({
   selector: 'app-product',
-  imports: [CommonModule, ProductCardComponent, FormsModule, FiltersComponent],
+  imports: [CommonModule, ProductCardComponent, FormsModule, FiltersComponent, Skeleton],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss',
 })

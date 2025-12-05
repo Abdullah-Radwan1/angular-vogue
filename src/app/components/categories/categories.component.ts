@@ -1,11 +1,12 @@
 import { Component, signal, inject } from '@angular/core';
 import { productStore } from '../../../stores/product.store';
 import { ProductCardComponent } from '../../components/product-card/product-card.component';
+import { Skeleton } from '../skeleton/skeleton';
 
 @Component({
   selector: 'app-categories',
   standalone: true,
-  imports: [ProductCardComponent], // no CommonModule needed for @for/@if in Angular 20
+  imports: [ProductCardComponent, Skeleton], // no CommonModule needed for @for/@if in Angular 20
   templateUrl: './categories.html',
   styleUrls: ['./categories.scss'],
 })

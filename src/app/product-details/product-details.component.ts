@@ -7,10 +7,11 @@ import { ProductCardComponent } from '../components/product-card/product-card.co
 import { HeartIcon, LucideAngularModule, Check } from 'lucide-angular';
 import { wishlistStore } from '../../stores/wishlist.store';
 import { ToastService } from '../../services/taost.service';
+import { Skeleton } from '../components/skeleton/skeleton';
 
 @Component({
   selector: 'app-product-details',
-  imports: [RouterLink, LucideAngularModule, ProductCardComponent],
+  imports: [RouterLink, LucideAngularModule, ProductCardComponent, Skeleton],
   templateUrl: './product-details.html',
   styleUrl: './product-details.scss',
 })

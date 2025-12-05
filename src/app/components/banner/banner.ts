@@ -1,19 +1,16 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, OnInit, OnDestroy, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 @Component({
   selector: 'app-banner',
-  imports: [],
   templateUrl: './banner.html',
-  styleUrl: './banner.scss',
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class Banner {
-  // 🔥 STEP 1 — Banners Data
+export class BannerComponent implements OnInit, OnDestroy {
   banners = [
     {
       title: 'Modern Elegance',
       subtitle: 'Ergonomic Chair',
-      description:
-        'Experience unparalleled comfort with our premium ergonomic design, crafted for those who value both style and substance in their workspace.',
+      description: 'Experience unparalleled comfort with our premium ergonomic design.',
       img: '/chair.png',
       ctaText: 'Shop Chairs',
       features: ['Ergonomic Design', 'Premium Materials', '24h Comfort'],
@@ -21,8 +18,7 @@ export class Banner {
     {
       title: 'Artistic Touch',
       subtitle: 'Ceramic Vase Collection',
-      description:
-        'Transform your space with our handcrafted ceramic vases, each piece telling a unique story of artistry and timeless beauty.',
+      description: 'Transform your space with handcrafted ceramic vases, each unique.',
       img: '/vase.jpg',
       ctaText: 'Explore Vases',
       features: ['Handcrafted', 'Unique Designs', 'Premium Ceramic'],
@@ -30,35 +26,30 @@ export class Banner {
     {
       title: 'Timeless Precision',
       subtitle: 'Minimalist Clock',
-      description:
-        'Where modern minimalism meets precision engineering. A statement piece that complements any interior while keeping perfect time.',
+      description: 'Minimalism meets precision. Perfect for any interior.',
       img: '/clock.jpg',
       ctaText: 'Discover Clocks',
       features: ['Quiet Movement', 'Sleek Design', 'Battery Included'],
     },
   ];
 
-  // 🔥 STEP 2 — Active banner index as Signal
   activeBanner = signal(0);
-  // 🔹 STEP 3 — Function to switch banner manually
-  selectBanner(index: number) {
-    this.activeBanner.set(index);
-  }
-  // 🔹 STEP 4 — Interval ID for automatic sliding
-  private intervalId!: any;
+  private intervalId!: number;
 
   ngOnInit(): void {
-    // 🔹 Auto-slide every 3 seconds
-    this.intervalId = setInterval(() => {
+    this.intervalId = window.setInterval(() => {
       this.nextBanner();
-    }, 3000);
+    }, 3500);
   }
 
   ngOnDestroy(): void {
-    clearInterval(this.intervalId); // stop auto-sliding when component is destroyed
+    clearInterval(this.intervalId);
   }
 
-  // 🔹 Move to next banner
+  selectBanner(index: number) {
+    this.activeBanner.set(index);
+  }
+
   nextBanner() {
     const next = (this.activeBanner() + 1) % this.banners.length;
     this.activeBanner.set(next);

@@ -4,11 +4,7 @@
   <div class="p-4 flex-1">
     @if(productStore.loading()) {
 
-    <img
-      class="flex h-52 w-52 items-center min-h-screen content-center mx-auto"
-      alt="loader"
-      src="loader.svg"
-    />
+    <app-skeleton></app-skeleton>
 
     } @else if (productStore.error()) {
     <!-- error loading products -->

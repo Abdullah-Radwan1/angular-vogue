@@ -1,6 +1,6 @@
 <section class="mt-16 tracking-widest">
   <!-- Categories -->
-  <div class="flex gap-8  flex-wrap text-xs">
+  <div class="flex gap-8 flex-wrap text-xs">
     @for (cat of categories; track cat) {
     <h6
       class="cursor-pointer text-gray-400 hover:text-black transition"
@@ -13,18 +13,14 @@
   </div>
 
   <!-- Products Grid -->
-  @if (productStore.products().length > 0) {
+  <!-- Loading State -->
+  @if (productStore.loading()) {
+  <app-skeleton></app-skeleton>
+  } @else {
   <div class="grid grow grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 py-8">
     @for (product of productStore.products();track product.id) {
     <app-product-card [product]="product"></app-product-card>
     }
   </div>
-  }
-
-  <!-- Loading State -->
-  @if (productStore.loading()) {
-  <p class="mt-4 text-center text-gray-400">
-    <img src="/loader.svg" height="100" width="100" class="mx-auto" alt="" />
-  </p>
   }
 </section>

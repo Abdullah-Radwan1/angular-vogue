@@ -1,0 +1,16 @@
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-4">
+  @for (item of [1,2,3,4,5,6,7,8]; track item) {
+  <div class="rounded-md overflow-hidden">
+    <!-- Image skeleton -->
+    <div class="skeleton h-80 w-full"></div>
+
+    <div class="p-4">
+      <!-- Title skeleton -->
+      <div class="skeleton h-3 w-24 mx-auto mb-2"></div>
+
+      <!-- Price skeleton -->
+      <div class="skeleton h-3 w-12 mx-auto"></div>
+    </div>
+  </div>
+  }
+</div>

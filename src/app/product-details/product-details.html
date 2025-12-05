@@ -15,13 +15,13 @@
 
   <!-- Product details -->
   @if (productStore.selectedProduct()) {
-  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
     <!-- Product Image -->
     <div class="flex justify-center items-center">
       <img
         [src]="productStore.selectedProduct()?.image"
         [alt]="productStore.selectedProduct()?.name"
-        class="object-contain"
+        class="object-cover h-full"
       />
     </div>
 
@@ -77,9 +77,9 @@
     <p class="text-sm text-gray-400">You might also like</p>
   </div>
   @if (productStore.relatedloadig()) {
-  <img class="flex justify-center mx-auto" width="80" alt="loader" src="loader.svg" />
+  <app-skeleton></app-skeleton>
   } @else{
-  <div class="grid grid-cols-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
     @for (product of productStore.relatedProducts(); track product.id) {
 
     <app-product-card (addToCart)="addToCart($event)" [product]="product" />
