@@ -54,8 +54,8 @@
 
       <!-- Action Buttons -->
       <div class="flex gap-3 items-center">
-        <button class="btn" (click)="addToCart(productStore.selectedProduct())">ADD TO CART</button>
-        <button class="bg-black text-white btn" routerLink="/checkout">PROCEED TO CHECKOUT</button>
+        <button  (click)="addToCart(productStore.selectedProduct())" class="btn" >Add To Cart</button>
+        <button (click)="checkoutCheck(productStore.selectedProduct())" class="  btn btn-accent" routerLink="/checkout">Add & Process To Checkout</button>
       </div>
       <!-- wishlist  -->
       @let product = productStore.selectedProduct(); @if (product) { @if
