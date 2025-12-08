@@ -22,6 +22,17 @@
 
   <div class="space-y-6">
     <h2 class="text-2xl font-bold">Payment</h2>
-    <button class="btn btn-primary w-full" (click)="checkout()">Pay with Stripe</button>
+
+ 
+
+     <button class="btn btn-primary w-full" (click)="checkout()">
+@if (loading) {
+
+   <lucide-icon [name]="loader"  size="22" class="animate-spin"></lucide-icon>
+}
+@else{
+  Pay With Stripe
+}
+   </button>
   </div>
 </div>

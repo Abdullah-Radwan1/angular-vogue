@@ -1,5 +1,5 @@
 import { Component, inject, OnDestroy } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { productStore } from '../../stores/product.store';
 import { cartStore } from '../../stores/cart.store';
 import { Subject, takeUntil } from 'rxjs';
@@ -30,7 +30,7 @@ export class ProductDetails implements OnDestroy {
   // A Subject used as a "destroy notifier" to automatically unsubscribe from Observables
   private destroy$ = new Subject<void>();
 
-  constructor() {
+  constructor(private router: Router) {
     // Subscribe to changes in the route parameters (e.g., /product/:id)
     // 'takeUntil(this.destroy$)' ensures the subscription is automatically unsubscribed when the component is destroyed
     this.route.paramMap.pipe(takeUntil(this.destroy$)).subscribe((params) => {
@@ -49,6 +49,14 @@ export class ProductDetails implements OnDestroy {
     });
   }
 
+  checkoutCheck(product: any){
+       const items = this.cartStore.items();
+     if (items.length === 0) {
+     this.cartStore.addToCart(product);
+     
+    }
+     
+  }
   // Method to add a product to the cart
   addToCart(product: any) {
     this.cartStore.addToCart(product);
